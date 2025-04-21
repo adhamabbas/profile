@@ -50,26 +50,9 @@ const Navigation = () => {
               {/* Main name container */}
               <motion.div
                 className="relative px-6 py-3"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
               >
-                {/* Glowing background effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  animate={{
-                    background: [
-                      'linear-gradient(to right, rgba(96, 165, 250, 0.2), rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
-                      'linear-gradient(to right, rgba(236, 72, 153, 0.2), rgba(96, 165, 250, 0.2), rgba(168, 85, 247, 0.2))',
-                      'linear-gradient(to right, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2), rgba(96, 165, 250, 0.2))',
-                    ],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-
                 {/* Name text */}
                 <div className="relative flex items-center">
                   <motion.span
@@ -77,10 +60,6 @@ const Navigation = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    whileHover={{
-                      background: 'linear-gradient(to right, #60a5fa, #a855f7, #ec4899)',
-                      transition: { duration: 0.3 }
-                    }}
                   >
                     Adham
                   </motion.span>
@@ -89,10 +68,6 @@ const Navigation = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    whileHover={{ 
-                      color: '#60a5fa',
-                      transition: { duration: 0.3 }
-                    }}
                   >
                     Abbas
                   </motion.span>
@@ -100,10 +75,10 @@ const Navigation = () => {
 
                 {/* Animated underline */}
                 <motion.div
-                  className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                 />
               </motion.div>
             </motion.div>

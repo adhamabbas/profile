@@ -12,7 +12,7 @@ const projects = [
     technologies: ['Node.js', 'MongoDB', 'Express'],
     image: images.projects.hndzz,
     githubLink: 'https://github.com/adhamabbas/E-commerce',
-    liveLink: 'https://ecommerce-demo.com',
+    liveLink: '#',
   },
   {
     title: 'Alamia Management System',
@@ -66,9 +66,12 @@ const Projects = () => {
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index === 0}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = '/placeholder.svg';
+                    target.onerror = null; // Prevent infinite loop
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
