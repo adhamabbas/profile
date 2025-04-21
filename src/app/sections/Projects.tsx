@@ -9,20 +9,28 @@ const projects = [
   {
     title: 'E-commerce Platform',
     description: 'A full-featured e-commerce platform with user authentication, product management, and payment integration.',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+    technologies: ['Node.js', 'MongoDB', 'Express'],
     image: images.projects.hndzz,
-    githubLink: 'https://github.com/yourusername/ecommerce',
+    githubLink: 'https://github.com/adhamabbas/E-commerce',
     liveLink: 'https://ecommerce-demo.com',
   },
   {
     title: 'Alamia Management System',
     description: 'A comprehensive management system for Alamia organization with user roles and reporting features.',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Express'],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
     image: images.projects.alamia,
-    githubLink: 'https://github.com/yourusername/alamia',
-    liveLink: 'https://alamia-management.com',
+    githubLink: 'https://github.com/adhamabbas/Alamya',
+    liveLink: 'https://alamiaa.netlify.app/',
   },
-  
+ 
+  {
+    title: 'Health Project',
+    description: 'A health-related project built with modern web technologies.',
+    technologies: ['JavaScript', 'Node.js', 'MongoDB', 'Express'],
+    image: images.projects.health,
+    githubLink: 'https://github.com/adhamabbas/profile',
+    liveLink: '#',
+  }
 ]
 
 const Projects = () => {
@@ -96,16 +104,18 @@ const Projects = () => {
                   >
                     View on GitHub
                   </motion.a>
-                  <motion.a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Live Demo
-                  </motion.a>
+                  {project.liveLink !== '#' && (
+                    <motion.a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Live Demo
+                    </motion.a>
+                  )}
                 </div>
               </div>
             </motion.div>

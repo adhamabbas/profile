@@ -14,12 +14,6 @@ async function compressImage(inputPath, outputPath, quality = 80) {
 }
 
 async function compressImages() {
-  // Compress profile image
-  await compressImage(
-    'public/profile.png',
-    'public/profile_compressed.jpg'
-  );
-
   // Compress certificate images
   const certificates = [
     'MongoDB.pdf.png',

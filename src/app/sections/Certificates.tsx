@@ -1,31 +1,55 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaSpinner } from 'react-icons/fa'
 import { images } from '@/config/images'
 
 const certificates = [
   {
     id: 1,
-    title: 'Full Stack Web Development',
+    title: 'MongoDB Certification',
+    issuer: 'MongoDB University',
+    image: images.certificates.mongodb,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 2,
+    title: 'Full Stack Development',
     issuer: 'Udacity',
     image: images.certificates.fullstack,
     date: '2024',
     placeholder: '/certificates/placeholder.svg',
   },
   {
-    id: 2,
-    title: 'Backend Development',
+    id: 3,
+    title: 'Coursera Certification 1',
     issuer: 'Coursera',
-    image: images.certificates.coursera,
+    image: images.certificates.coursera1,
     date: '2024',
     placeholder: '/certificates/placeholder.svg',
   },
   {
-    id: 3,
+    id: 4,
+    title: 'Coursera Certification 2',
+    issuer: 'Coursera',
+    image: images.certificates.coursera2,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 5,
+    title: 'SkillsBuild Certification',
+    issuer: 'IBM',
+    image: images.certificates.skillsbuild,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 6,
     title: 'Node.js E-commerce',
     issuer: 'Udacity',
     image: images.certificates.nodejs,
@@ -33,15 +57,7 @@ const certificates = [
     placeholder: '/certificates/placeholder.svg',
   },
   {
-    id: 4,
-    title: 'MongoDB',
-    issuer: 'MongoDB University',
-    image: images.certificates.mongodb,
-    date: '2024',
-    placeholder: '/certificates/placeholder.svg',
-  },
-  {
-    id: 5,
+    id: 7,
     title: 'Git & GitHub',
     issuer: 'Udacity',
     image: images.certificates.git,
@@ -49,18 +65,59 @@ const certificates = [
     placeholder: '/certificates/placeholder.svg',
   },
   {
-    id: 6,
-    title: 'SkillsBuild',
-    issuer: 'IBM',
-    image: '/certificates/SkillsBuild.pdf.png',
+    id: 8,
+    title: 'UI/UX Design',
+    issuer: 'Udacity',
+    image: images.certificates.uiux,
     date: '2024',
     placeholder: '/certificates/placeholder.svg',
   },
+  {
+    id: 9,
+    title: 'Motion Graphics',
+    issuer: 'Udacity',
+    image: images.certificates.motionGraphic,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 10,
+    title: 'Canva Design Badge',
+    issuer: 'Canva',
+    image: images.certificates.canva,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 11,
+    title: 'Attendance Certificate 1',
+    issuer: 'Udacity',
+    image: images.certificates.attendance1,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 12,
+    title: 'Attendance Certificate 2',
+    issuer: 'Udacity',
+    image: images.certificates.attendance2,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  },
+  {
+    id: 13,
+    title: 'Course Certificate',
+    issuer: 'Udacity',
+    image: images.certificates.courseCertificate,
+    date: '2024',
+    placeholder: '/certificates/placeholder.svg',
+  }
 ]
 
 const CertificateCard = ({ certificate, index }: { certificate: typeof certificates[0], index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [imageError, setImageError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -82,6 +139,11 @@ const CertificateCard = ({ certificate, index }: { certificate: typeof certifica
           transition={{ duration: 0.3 }}
           className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-700"
         >
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <FaSpinner className="animate-spin text-blue-500" size={24} />
+            </div>
+          )}
           {imageError ? (
             <div className="absolute inset-0 flex items-center justify-center text-gray-500">
               <span>{certificate.title}</span>
@@ -94,6 +156,7 @@ const CertificateCard = ({ certificate, index }: { certificate: typeof certifica
               className="object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onError={() => setImageError(true)}
+              onLoadingComplete={() => setIsLoading(false)}
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
@@ -116,16 +179,29 @@ const CertificateCard = ({ certificate, index }: { certificate: typeof certifica
 
 const Certificates = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % certificates.length)
+      }, 5000)
+    }
+    return () => clearInterval(interval)
+  }, [isAutoPlaying])
+
   const nextSlide = () => {
+    setIsAutoPlaying(false)
     setCurrentIndex((prev) => (prev + 1) % certificates.length)
   }
 
   const prevSlide = () => {
+    setIsAutoPlaying(false)
     setCurrentIndex((prev) => (prev - 1 + certificates.length) % certificates.length)
   }
 
@@ -155,6 +231,7 @@ const Certificates = () => {
               fill
               className="object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+              priority
             />
             
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-50" />
@@ -185,7 +262,10 @@ const Certificates = () => {
             {certificates.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  setIsAutoPlaying(false)
+                  setCurrentIndex(index)
+                }}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   index === currentIndex ? 'bg-blue-500' : 'bg-gray-600'
                 }`}

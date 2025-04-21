@@ -114,13 +114,28 @@ const StarBackground = () => {
 }
 
 const ShootingStar = () => {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+
+    updateDimensions()
+    window.addEventListener('resize', updateDimensions)
+    return () => window.removeEventListener('resize', updateDimensions)
+  }, [])
+
   return (
     <motion.div
-      className="absolute w-1 h-1 bg-white rounded-full"
+      className="absolute w-2 h-2 bg-white rounded-full shadow-lg"
       initial={{ x: -100, y: 0, opacity: 0 }}
       animate={{
-        x: [0, window.innerWidth + 100],
-        y: [0, window.innerHeight / 2],
+        x: [0, dimensions.width + 100],
+        y: [0, dimensions.height / 2],
         opacity: [0, 1, 0],
       }}
       transition={{
@@ -289,7 +304,7 @@ export default function Home() {
             >
               <div className="relative w-48 h-48 md:w-64 md:h-64">
                 <Image
-                  src="/profile.png"
+                  src="https://res.cloudinary.com/dikief0td/image/upload/v1745245508/profile/profile.jpg"
                   alt="Profile Image"
                   fill
                   className="rounded-full object-cover border-4 border-white/20 shadow-lg relative z-10"

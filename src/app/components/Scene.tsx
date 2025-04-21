@@ -148,7 +148,7 @@ const Scene = () => {
               />
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-purple-500/30">
                 <Image
-                  src="/profile.png"
+                  src="https://res.cloudinary.com/dikief0td/image/upload/v1745245508/profile/profile.jpg"
                   alt="Profile"
                   fill
                   className="object-cover"

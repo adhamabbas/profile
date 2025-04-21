@@ -4,25 +4,18 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'drive.google.com',
+        hostname: 'res.cloudinary.com',
         port: '',
-        pathname: '/uc*',
-      },
+        pathname: '/**',
+      }
     ],
-    domains: ['localhost'],
-    unoptimized: true,
   },
   reactStrictMode: true,
   swcMinify: true,
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   },
-  // Enable static exports for Netlify
-  output: 'export',
-  // Disable server-side features not needed for static export
-  trailingSlash: true,
-  // Ensure images are handled correctly in static export
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
 }
 
 module.exports = nextConfig 
