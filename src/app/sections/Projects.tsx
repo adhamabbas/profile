@@ -28,8 +28,8 @@ const projects = [
     description: 'A health-related project built with modern web technologies.',
     technologies: ['JavaScript', 'Node.js', 'MongoDB', 'Express'],
     image: images.projects.health,
-    githubLink: 'https://github.com/adhamabbas/profile',
-    liveLink: '#',
+    githubLink: 'https://github.com/adhamabbas/health',
+    liveLink: 'https://health-recorder.netlify.app/',
   }
 ]
 
